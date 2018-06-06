@@ -16,5 +16,6 @@ Including another URLconf
 from django.conf.urls import url
 from . import views
 urlpatterns = [
-    url(r'host/', views.host)
+    url(r'host/', views.host),
+    url(r'load/(\d+)/$', views.add_load),
 ]

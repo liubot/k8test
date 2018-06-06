@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from docker.models import hosts
 import os
 import socket
+import hashlib
 
 # Create your views here.
 hostname = socket.gethostname()
@@ -18,3 +19,12 @@ def host(request):
 
 def add(hostname):
     hosts.objects.create(host=hostname,count=1)
+
+
+def add_load(request,num):
+    hl = hashlib.md5()
+    count = num
+    count = int(count)**int(count)
+    s = str(count)
+    hl.update(s.encode(encoding='utf-8'))
+    return HttpResponse('MD5:' + hl.hexdigest())
